@@ -23,7 +23,7 @@ export default function Login() {
   }
 
   return (
-    <Container className="w-50">
+    <Container>
       <h2 className="text-center">Login</h2>
       <Form>
         <Form.Group className="my-3" controlId="formBasicEmail">
@@ -47,7 +47,7 @@ export default function Login() {
         </Button>
         <Button
           disabled={loading}
-          href="/Signup"
+          href="signup"
           className="mx-2"
           variant="outline-dark"
           type="submit"

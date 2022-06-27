@@ -10,14 +10,15 @@ import {
 } from "firebase/auth";
 
 const CSNetwork = React.createContext();
+
 export function useFireContext() {
   return useContext(CSNetwork);
 }
 
 export function Context({ children }) {
   const [user, setuser] = useState(null);
-  const [admin, setadmin] = useState(null);
-  const [loading, setloading] = useState(null);
+  const [admin, setadmin] = useState(false);
+  const [loading, setloading] = useState(true);
 
   function signupusingEmailandPassword(email, password) {
     return createUserWithEmailAndPassword(auth, email, password);

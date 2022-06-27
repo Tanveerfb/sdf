@@ -22,7 +22,7 @@ export default function Signup() {
     } catch (err) {}
   }
   return (
-    <Container className="w-50">
+    <Container>
       <h2 className="text-center">Signup</h2>
       <Form>
         <Form.Group className="my-3" controlId="formBasicEmail">
