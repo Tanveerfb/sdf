@@ -34,7 +34,7 @@ export function Context({ children }) {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       setuser(user);
       if (user) {
-        if (user.email == "admin@cs-network.web.app") {
+        if (user.email === "admin@cs-network.web.app") {
           setadmin(true);
         }
       }
