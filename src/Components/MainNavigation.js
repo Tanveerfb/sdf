@@ -7,28 +7,32 @@ import Signup from "../Pages/Signup";
 import Friends from "../Pages/Friends";
 import Marks from "../Pages/Marks";
 import Inbox from "../Pages/Inbox";
+import Welcome from "./Welcome";
 
 function MainNavigation() {
   const { user, admin } = useFireContext();
 
   if (user && user.email) {
     return (
-      <Router>
-        <NavbarComponent />
-        <Routes>
-          <Route path="/" element={<Profile />} />
-          <Route path="friends" element={<Friends />} />
-          <Route path="marks" element={<Marks />} />
-          <Route path="inbox" element={<Inbox />} />
-        </Routes>
-      </Router>
+      <>
+        <Router>
+          <NavbarComponent />
+          <Routes>
+            <Route path="/" element={<Profile />} />
+            <Route path="/friends" element={<Friends />} />
+            <Route path="/marks" element={<Marks />} />
+            <Route path="/inbox" element={<Inbox />} />
+          </Routes>
+        </Router>
+      </>
     );
   } else {
     return (
       <Router>
+        <Welcome />
         <Routes>
           <Route path="/" element={<Login />} />
-          <Route path="signup" element={<Signup />} />
+          <Route path="/signup" element={<Signup />} />
         </Routes>
       </Router>
     );

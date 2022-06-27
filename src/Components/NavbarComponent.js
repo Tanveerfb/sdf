@@ -3,6 +3,8 @@ import { Navbar, Nav, Container, Button } from "react-bootstrap";
 import { useFireContext } from "../Context";
 import { useNavigate } from "react-router-dom";
 import Welcome from "./Welcome";
+
+
 export default function NavbarComponent() {
   const { user, logOff } = useFireContext();
   const navigate = useNavigate();
