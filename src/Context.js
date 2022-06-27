@@ -1,11 +1,59 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState, useEffect } from "react";
+import { auth } from "./Firebase";
+import {
+  signOut,
+  signInWithEmailAndPassword,
+  createUserWithEmailAndPassword,
+  browserSessionPersistence,
+  setPersistence,
+  onAuthStateChanged,
+} from "firebase/auth";
 
 const CSNetwork = React.createContext();
-export const context = useContext(CSNetwork);
+export function useFireContext() {
+  return useContext(CSNetwork);
+}
 
+export function Context({ children }) {
+  const [user, setuser] = useState(null);
+  const [admin, setadmin] = useState(null);
+  const [loading, setloading] = useState(null);
 
-export function Context({children}) {
+  function signupusingEmailandPassword(email, password) {
+    return createUserWithEmailAndPassword(auth, email, password);
+  }
+  function loginusingEmailandPassword(email, password) {
+    return signInWithEmailAndPassword(auth, email, password);
+  }
+  function logOff() {
+    return signOut(auth);
+  }
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      setuser(user);
+      if (user) {
+        if (user.email == "admin@cs-network.web.app") {
+          setadmin(true);
+        }
+      }
+      setPersistence(auth, browserSessionPersistence);
+      setloading(false);
+    });
+
+    return unsubscribe;
+  }, []);
+  const value = {
+    user,
+    admin,
+    loginusingEmailandPassword,
+    signupusingEmailandPassword,
+    logOff,
+  };
+
   return (
-    <div>Context</div>
-  )
+    <CSNetwork.Provider value={value}>
+      {!loading && children}
+    </CSNetwork.Provider>
+  );
 }
